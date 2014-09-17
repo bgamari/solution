@@ -1,4 +1,4 @@
-all : hi.js
+all : solution.js
 
 %.js : %.coffee
 	coffee -b -c $<
