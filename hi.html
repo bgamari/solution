@@ -1,12 +1,48 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="hi.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="hi.css" type="text/css">
   </head>
   <body>
-    <h1>Components</h1>
-    <ul id="components"></ul>
-    <button id="add-component">+</button>
-    <h1>Result</h1>
+    <div class="container">
+      <table id="components" class="table">
+        <thead>
+          <tr>
+            <th>Component</th>
+            <th>Stock</th>
+            <th>Desired</th>
+            <th>Volume</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="solvent">
+            <td>Solvent</td>
+            <td></td>
+            <td></td>
+            <td class="volume"></td>
+        </tbody>
+      </table>
+
+      <div>
+        <label for="target-volume">Target volume</label> <input id="target-volume" value="10 mL" />
+      </div>
+      <div>
+        <button id="add-component" class="btn btn-primary">+ Add Component</button>
+      </div>
+
+      <div class="callout callout-info">
+        <h4>Usage</h4>
+        <p>
+          You can use the <span class="key">&#8593;</span>
+          and <span class="key">&#8595;</span> arrow keys to move between
+          rows. <span class="key">Alt + A</span> will add a
+          row. <span class="key">Alt + D</span> will remove a row.
+        </p>
+      </div>
+    </div>
   </body>
 </html>

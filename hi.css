@@ -1,0 +1,34 @@
+span.key {
+    font-family: Courier;
+    padding: 0 0.2em;
+    border: 1px #999 solid;
+    border-radius: 0.5em;
+    background-color: #eee;
+}
+
+input.concentration {
+    width: 10em;
+}
+
+.callout {
+    padding: 20px;
+    margin: 20px 0px;
+    border-width: 1px 1px 1px 5px;
+    border-style: solid;
+    border-color: #EEE;
+    border-image: none;
+    border-radius: 3px;
+}
+
+.callout h4 {
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+
+.callout-info {
+    border-left-color: #5BC0DE;
+}
+
+.callout-info h4 {
+    color: #5BC0DE;
+}
