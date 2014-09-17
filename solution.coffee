@@ -29,6 +29,8 @@ parse_quantity = (s, unit) ->
         conc = parseFloat(m[1]) * mult
 
 parse_input_quantity = (el, unit) ->
+    if el.val() == ""
+        return null
     q = parse_quantity(el.val(), unit)
     if q != null
         el.removeClass "bg-danger"
@@ -123,5 +125,5 @@ $(document).ready () ->
             item = add_component()
             $(".name", item).focus()
 
-    add_component
-    update
+    add_component()
+    update()
