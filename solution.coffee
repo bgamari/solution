@@ -94,7 +94,7 @@ add_component = () ->
     conc = $("<input/>", {
                 class: "concentration stock",
                 placeholder: "concentration",
-                size: 8})
+                size: 5})
     conc.change update
     conc.keypress (ev) -> arrow_move(ev, this, ".stock")
     item.append $("<td/>").append(conc)
@@ -102,7 +102,7 @@ add_component = () ->
     conc = $("<input/>", {
                 class: "concentration desired",
                 placeholder: "concentration",
-                size: 8})
+                size: 5})
     conc.change update
     conc.keypress (ev) -> arrow_move(ev, this, ".desired")
     item.append $("<td/>").append(conc)
