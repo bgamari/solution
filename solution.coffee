@@ -85,6 +85,13 @@ arrow_move = (ev, self, klass) ->
 
 add_component = () ->
     item = $("<tr/>", { class: "component" })
+
+    del_btn = $("<button/>", {class: "btn btn-danger btn-xs"})
+        .html("del")
+    del_btn.click (ev) ->
+        $(this.parentElement.parentElement).remove()
+    item.append $("<td/>").append(del_btn)
+
     name = $("<input/>", {
                 class: "name", type: "text",
                 placeholder: "name", size: 20})
