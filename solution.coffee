@@ -94,22 +94,23 @@ add_component = () ->
 
     name = $("<input/>", {
                 class: "name", type: "text",
-                placeholder: "name", size: 20})
+                placeholder: "name"})
+    name.attr('size', '18')
     name.keypress (ev) -> arrow_move(ev, this, ".name")
     item.append $("<td/>").append(name)
 
     conc = $("<input/>", {
                 class: "concentration stock",
-                placeholder: "concentration",
-                size: 5})
+                placeholder: "concentration"})
+    conc.attr('size', '9')
     conc.change update
     conc.keypress (ev) -> arrow_move(ev, this, ".stock")
     item.append $("<td/>").append(conc)
 
     conc = $("<input/>", {
                 class: "concentration desired",
-                placeholder: "concentration",
-                size: 5})
+                placeholder: "concentration"})
+    conc.attr('size', '9')
     conc.change update
     conc.keypress (ev) -> arrow_move(ev, this, ".desired")
     item.append $("<td/>").append(conc)
