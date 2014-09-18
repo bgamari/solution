@@ -4,6 +4,7 @@ span.key {
     border: 1px #999 solid;
     border-radius: 0.5em;
     background-color: #eee;
+    white-space: nowrap;
 }
 
 .callout {
