@@ -14,18 +14,15 @@ parse_quantity = (s, unit) ->
     if m == null
         return null
     else
-        if m[2] == ""
+        suffix = m[2]
+        if suffix.length == 0
             mult = 1
+        else if suffix == unit
+            mult = 1
+        else if suffix.length == 1 || suffix[1] == unit
+            mult = suffixes[suffix[0]]
         else
-            suffix = m[2]
-            if suffix.length == 0
-                mult = 1
-            else if suffix == unit
-                mult = 1
-            else if suffix.length == 1 || suffix[1] == unit
-                mult = suffixes[suffix[0]]
-            else
-                return null
+            return null
         conc = parseFloat(m[1]) * mult
 
 parse_input_quantity = (el, unit) ->
