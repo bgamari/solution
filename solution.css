@@ -41,3 +41,25 @@ input.concentration {
 input.volume {
     max-width: 8em;
 }
+
+@media print {
+    table#components {
+        width: 2in;
+    }
+
+    #usage {
+        display: none;
+    }
+
+    button.delete {
+        display: none;
+    }
+
+    button#add-component {
+        display: none;
+    }
+
+    #components tr.inactive {
+        display: none;
+    }
+}

@@ -48,6 +48,7 @@ update = (ev) ->
     solvent_vol = target_vol
     $("#components tr.component").each (n) ->
         el = $(this)
+        el.addClass "inactive"
         stock = parse_input_quantity($(".stock", el), "M")
         if stock == null
             return
@@ -60,6 +61,7 @@ update = (ev) ->
             el.addClass "warning"
             return
 
+        el.removeClass "inactive"
         el.removeClass "warning"
         el.children().removeClass "bg-danger"
         vol = desired * target_vol / stock
@@ -81,9 +83,9 @@ arrow_move = (ev, self, klass) ->
     $(klass, newRow).focus()
 
 add_component = () ->
-    item = $("<tr/>", { class: "component" })
+    item = $("<tr/>", { class: "component inactive" })
 
-    del_btn = $("<button/>", {class: "btn btn-danger btn-xs"})
+    del_btn = $("<button/>", {class: "btn btn-danger btn-xs delete"})
         .html("del")
     del_btn.click (ev) ->
         $(this.parentElement.parentElement).remove()
