@@ -33,3 +33,11 @@ span.key {
 table.components td.volume {
     whitespace: nowrap;
 }
+
+input.concentration {
+    max-width: 8em;
+}
+
+input.volume {
+    max-width: 8em;
+}
