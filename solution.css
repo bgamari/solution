@@ -29,3 +29,7 @@ span.key {
 .callout-info h4 {
     color: #5BC0DE;
 }
+
+table.components td.volume {
+    whitespace: nowrap;
+}
