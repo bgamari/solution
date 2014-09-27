@@ -47,32 +47,57 @@ format_quantity = (n, unit) ->
             return nn + " " + suffix + unit
     return n.toFixed(3) + " " + unit
 
-update = (ev) ->
-    target_vol = parse_input_quantity($("#target-volume"), "L")
-    solvent_vol = target_vol
+fetch_state = () ->
+    target_volume = parse_input_quantity($("#target-volume"), "L")
+    s = {
+        components: [],
+        target_volume: target_volume
+    }
     $("#components tr.component").each (n) ->
         el = $(this)
-        el.addClass "inactive"
-        stock = parse_input_quantity($(".stock", el), "M")
-        if stock == null
+        c = {}
+        c.row = el
+        c.name = $(".name", el).val()
+        c.stock = parse_input_quantity($(".stock", el), "M")
+        c.desired = parse_input_quantity($(".desired", el), "M")
+        s.components.push c
+    return s
+
+load_state = (s) ->
+    $("#components tr.component").remove()
+    $("#target-volume").val s.target_volume
+    for c in s.components
+        el = add_component()
+        $(".name", el).val c.name
+        $(".stock", el).val c.stock
+        $(".desired", el).val c.desired
+
+    update()
+
+solve = (s) ->
+    s.solvent_vol = s.target_volume
+    for c in s.components
+        c.volume = c.desired * s.target_volume / c.stock
+        s.solvent_vol -= c.volume
+
+update = (ev) ->
+    s = fetch_state()
+    solve(s)
+    for comp in s.components
+        row = comp.row
+        row.addClass "inactive"
+        if comp.desired == null || comp.stock == null
+            return
+        else if comp.desired > comp.stock
+            row.addClass "warning"
             return
 
-        desired = parse_input_quantity($(".desired", el), "M")
-        if desired == null
-            return
+        row.removeClass "inactive"
+        row.removeClass "warning"
+        row.children().removeClass "bg-danger"
+        $(".volume", row).html(format_quantity(comp.volume, "L"))
 
-        if desired > stock
-            el.addClass "warning"
-            return
-
-        el.removeClass "inactive"
-        el.removeClass "warning"
-        el.children().removeClass "bg-danger"
-        vol = desired * target_vol / stock
-        solvent_vol -= vol
-        $(".volume", el).html(format_quantity(vol, "L"))
-
-    $("#components tr.solvent .volume").html(format_quantity(solvent_vol, "L"))
+    $("#components tr.solvent .volume").html(format_quantity(s.solvent_vol, "L"))
 
 arrow_move = (ev, self, klass) ->
     if ev.keyCode == 38 # up arrow
