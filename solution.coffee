@@ -153,6 +153,16 @@ add_component = () ->
     $("#components tbody").append item
     return item
 
+load_example = () ->
+    load_state {
+        target_volume: 1e-3,
+        components: [
+            {name: "PIPES pH 7.5", stock: 1, desired: 20e-3},
+            {name: "Oligo", stock: 1e-6, desired: 2e-9},
+            {name: "Trolox", stock: 100e-3, desired: 1e-6},
+        ],
+    }
+
 $(document).ready () ->
     $("#add-component").click add_component
     $("#target-volume").change update
