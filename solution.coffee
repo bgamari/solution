@@ -10,6 +10,10 @@ suffixes = {
 }
 
 parse_quantity = (s, unit) ->
+    m = /^([\-\+]?(?:[0-9]+(?:\.[0-9]+)?))e[\-\+]?[0-9]+$/.exec(s)
+    if m != null
+        return parseFloat(s)
+
     m = /^([\-\+]?(?:[0-9]+(?:\.[0-9]+)?))\s*(\w*)$/.exec(s)
     if m == null
         return null
@@ -23,7 +27,7 @@ parse_quantity = (s, unit) ->
             mult = suffixes[suffix[0]]
         else
             return null
-        conc = parseFloat(m[1]) * mult
+        return parseFloat(m[1]) * mult
 
 parse_input_quantity = (el, unit) ->
     if el.val() == ""
