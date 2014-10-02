@@ -77,6 +77,8 @@ load_state = (s) ->
 solve = (s) ->
     s.solvent_vol = s.target_volume
     for c in s.components
+        if c.desired == null or c.stock == null
+            continue
         c.volume = c.desired * s.target_volume / c.stock
         s.solvent_vol -= c.volume
 
@@ -87,10 +89,10 @@ update = (ev) ->
         row = comp.row
         row.addClass "inactive"
         if comp.desired == null || comp.stock == null
-            return
+            continue
         else if comp.desired > comp.stock
             row.addClass "warning"
-            return
+            continue
 
         row.removeClass "inactive"
         row.removeClass "warning"
