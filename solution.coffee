@@ -99,7 +99,12 @@ update = (ev) ->
         row.children().removeClass "bg-danger"
         $(".volume", row).html(format_quantity(comp.volume, "L"))
 
-    $("#components tr.solvent .volume").html(format_quantity(s.solvent_vol, "L"))
+    if s.solvent_vol < 0
+        $("#components tr.solvent").addClass "warning"
+        $("#components tr.solvent .volume").html "imposssible"
+    else
+        $("#components tr.solvent").removeClass "warning"
+        $("#components tr.solvent .volume").html format_quantity(s.solvent_vol, "L")
 
 arrow_move = (ev, self, klass) ->
     if ev.keyCode == 38 # up arrow
