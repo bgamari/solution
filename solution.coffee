@@ -35,17 +35,17 @@ parse_input_quantity = (el, unit) ->
     q = parse_quantity(el.val(), unit)
     if q != null
         el.removeClass "bg-danger"
-        el.val format_quantity(q, unit)
+        el.val format_quantity(q, unit, 1)
     else
         el.addClass "bg-danger"
     return q
 
-format_quantity = (n, unit) ->
+format_quantity = (n, unit, digits) ->
     for suffix, mult of suffixes
-        nn = (n / mult).toFixed(1)
+        nn = (n / mult).toFixed(digits)
         if nn < 1000 && nn >= 1
             return nn + " " + suffix + unit
-    return n.toFixed(3) + " " + unit
+    return n.toFixed(digits) + " " + unit
 
 fetch_state = () ->
     target_volume = parse_input_quantity($("#target-volume"), "L")
@@ -97,14 +97,14 @@ update = (ev) ->
         row.removeClass "inactive"
         row.removeClass "warning"
         row.children().removeClass "bg-danger"
-        $(".volume", row).html(format_quantity(comp.volume, "L"))
+        $(".volume", row).html(format_quantity(comp.volume, "L", 2))
 
     if s.solvent_vol < 0
         $("#components tr.solvent").addClass "warning"
         $("#components tr.solvent .volume").html "imposssible"
     else
         $("#components tr.solvent").removeClass "warning"
-        $("#components tr.solvent .volume").html format_quantity(s.solvent_vol, "L")
+        $("#components tr.solvent .volume").html format_quantity(s.solvent_vol, "L", 2)
 
 arrow_move = (ev, self, klass) ->
     if ev.keyCode == 38 # up arrow
